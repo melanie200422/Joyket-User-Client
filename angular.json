@@ -1,7 +1,7 @@
 {
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "cli": {
-      "analytics": "2407d5cd-0e1f-42bc-a26c-f3cc0ba69947"
+        "analytics": "2407d5cd-0e1f-42bc-a26c-f3cc0ba69947"
     },
     "version": 1,
     "newProjectRoot": "projects",
@@ -29,9 +29,11 @@
                             "src/favicon.png"
                         ],
                         "styles": [
-                            "src/styles.css",
                             "node_modules/bootstrap/dist/css/bootstrap.min.css",
-                            "src/assets/sb-admin-2.min.css"
+                            "src/assets/sb-admin-2.min.css",
+                            "src/custom-theme.scss",
+                            "src/styles.css",
+                            "node_modules/ngx-toastr/toastr.css"
                         ],
                         "scripts": [
                             "node_modules/jquery/dist/jquery.min.js",
