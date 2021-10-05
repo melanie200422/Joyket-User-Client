@@ -19,7 +19,6 @@ export class CategoryComponent implements OnInit {
   categories!: Category[];
   categoriesLength!: number;
   columns: string[] = ['categoryId', 'categoryName', 'view', 'delete'];
-  isLoading = true;
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -33,7 +32,6 @@ export class CategoryComponent implements OnInit {
 
   getAll() {
     this.categoryService.getAll().subscribe(data => {
-      this.isLoading = false;
       this.categories = data as Category[];
       this.listData = new MatTableDataSource(this.categories);
       this.listData.sort = this.sort;
