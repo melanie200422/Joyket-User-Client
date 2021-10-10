@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -15,6 +15,9 @@ export class AddCustomerComponent implements OnInit {
 
   customer!: Customer;
 
+  @Output()
+  saveFinish: EventEmitter<any> = new EventEmitter<any>();
+
   selectFile!: File;
   url: string = 'https://res.cloudinary.com/veggie-shop/image/upload/v1633795994/users/mnoryxp056ohm0b4gcrj.png';
   image: string = this.url;
@@ -28,12 +31,12 @@ export class AddCustomerComponent implements OnInit {
       'name': new FormControl(null, [Validators.minLength(4), Validators.required]),
       'password': new FormControl(null, [Validators.minLength(6), Validators.required]),
       'address': new FormControl(null, [Validators.minLength(4), Validators.required]),
-      'phone': new FormControl(null, [Validators.minLength(4), Validators.required]),
+      'phone': new FormControl(null, [Validators.required, Validators.pattern('(0)[0-9]{9}')]),
       'gender': new FormControl(true),
       'registerDate': new FormControl(new Date()),
       'status': new FormControl(1),
     })
-   }
+  }
 
   ngOnInit(): void {
   }
@@ -42,8 +45,14 @@ export class AddCustomerComponent implements OnInit {
     if (this.postForm.valid) {
       this.customer = this.postForm.value;
       this.customer.image = this.image;
-      console.log(this.customer);
-      
+      this.customerService.post(this.customer).subscribe(data => {
+        this.toastr.success('Thêm thành công', 'Hệ thống');
+        this.modalService.dismissAll();
+        this.saveFinish.emit('done');
+      }, error => {
+        this.toastr.error('Thêm thất bại!', 'Hệ thống');
+      })
+
     } else {
       this.toastr.error('Thêm thất bại!', 'Hệ thống');
     }
@@ -53,7 +62,7 @@ export class AddCustomerComponent implements OnInit {
       'name': new FormControl(null, [Validators.minLength(4), Validators.required]),
       'password': new FormControl(null, [Validators.minLength(6), Validators.required]),
       'address': new FormControl(null, [Validators.minLength(4), Validators.required]),
-      'phone': new FormControl(null, [Validators.minLength(4), Validators.required]),
+      'phone': new FormControl(null, [Validators.required, Validators.pattern('(0)[0-9]{9}')]),
       'gender': new FormControl(true),
       'registerDate': new FormControl(new Date()),
       'status': new FormControl(1),

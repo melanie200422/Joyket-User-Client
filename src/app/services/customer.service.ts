@@ -15,8 +15,16 @@ export class CustomerService {
     return this.httpClient.get(this.url);
   }
 
+  post(customer: Customer) {
+    return this.httpClient.post(this.url, customer);
+  }
+
   getOne(id: number) {
     return this.httpClient.get(this.url + '/' + id);
+  }
+
+  getByEmail(email: string) {
+    return this.httpClient.get(this.url + '/email/' + email);
   }
 
   delete(id: number) {

@@ -33,22 +33,23 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
+import { AuthGuard } from '../guard/auth.guard';
 
 const routes: Routes = [
   {
     path: 'admin', component: AdminComponent,
     children : [
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'category', component: CategoryComponent },
-      { path: 'product', component: ProductComponent },
-      { path: 'customer', component: CustomerComponent },
-      { path: 'rate', component: RateComponent },
-      { path: 'statistical-month', component: StatisticalMonthComponent },
-      { path: 'statistical-year', component: StatisticalYearComponent },
-      { path: 'inventory', component: InventoryComponent },
-      { path: 'order', component: OrderComponent },
-      { path: 'profile', component: ProfileComponent },
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+      { path: 'category', component: CategoryComponent, canActivate: [AuthGuard] },
+      { path: 'product', component: ProductComponent, canActivate: [AuthGuard] },
+      { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard] },
+      { path: 'rate', component: RateComponent, canActivate: [AuthGuard] },
+      { path: 'statistical-month', component: StatisticalMonthComponent, canActivate: [AuthGuard] },
+      { path: 'statistical-year', component: StatisticalYearComponent, canActivate: [AuthGuard] },
+      { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
+      { path: 'order', component: OrderComponent, canActivate: [AuthGuard] },
+      { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     ]
   }
 
@@ -98,6 +99,7 @@ const routes: Routes = [
       closeButton: true,
     }),
     RouterModule.forRoot(routes)
-  ]
+  ],
+  providers:[AuthGuard]
 })
 export class AdminModule { }

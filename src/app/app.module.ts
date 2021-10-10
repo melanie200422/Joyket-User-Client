@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
 import { LoginComponent } from './login/login.component';
 import { LoginModule } from './login/login.module';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
