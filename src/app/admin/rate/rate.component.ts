@@ -14,4 +14,9 @@ export class RateComponent implements OnInit {
     this.pageService.setPageActive('rate');
   }
 
+  search(event: any) {
+    const fValue = (event.target as HTMLInputElement).value;
+    // this.listData.filter = fValue.trim().trim().toLowerCase();
+  }
+
 }

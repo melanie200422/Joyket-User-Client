@@ -6,6 +6,7 @@
         <form [formGroup]="postForm" class="row">
             <input type="hidden" formControlName='productId'>
             <input type="hidden" formControlName="status">
+            <input type="hidden" formControlName="sold">
             <div class="form-group col-6">
                 <label for="name">Tên sản phẩm</label>
                 <input type="text" id="name" [ngClass]="{'is-invalid':postForm.get('name')?.touched && postForm.get('name')?.invalid}" class="form-control" formControlName="name">

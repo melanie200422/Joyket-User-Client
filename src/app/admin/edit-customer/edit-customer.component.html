@@ -1,6 +1,6 @@
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h2 class="modal-title m-0">Thêm người dùng</h2>
+        <h2 class="modal-title m-0">Chỉnh sửa thông tin người dùng</h2>
     </div>
     <div class="modal-body p-4">
         <form [formGroup]="postForm" class="row">
@@ -59,8 +59,9 @@
                 </div>
             </div>
 
-            <button mat-raised-button color="primary" class="col-2 m-3" [disabled]="postForm?.invalid" (click)="save()">Thêm</button>
+            <button mat-raised-button color="primary" class="col-2 m-3" [disabled]="postForm?.invalid" (click)="update()">Chỉnh sửa</button>
         </form>
     </div>
 </ng-template>
-<button mat-raised-button color="primary" (click)="open(content)">Thêm người dùng</button>
+
+<a style="color: steelblue; cursor: pointer;" (click)="open(content)"><i class="fas fa-edit"></i></a>

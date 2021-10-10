@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -7,11 +7,11 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
-  selector: 'app-add-customer',
-  templateUrl: './add-customer.component.html',
-  styleUrls: ['./add-customer.component.css']
+  selector: 'app-edit-customer',
+  templateUrl: './edit-customer.component.html',
+  styleUrls: ['./edit-customer.component.css']
 })
-export class AddCustomerComponent implements OnInit {
+export class EditCustomerComponent implements OnInit {
 
   customer!: Customer;
 
@@ -20,6 +20,10 @@ export class AddCustomerComponent implements OnInit {
   image: string = this.url;
 
   postForm: FormGroup;
+
+  @Input() id!: number;
+  @Output()
+  editFinish: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private modalService: NgbModal, private customerService: CustomerService, private toastr: ToastrService, private uploadService: UploadService) {
     this.postForm = new FormGroup({
@@ -33,33 +37,45 @@ export class AddCustomerComponent implements OnInit {
       'registerDate': new FormControl(new Date()),
       'status': new FormControl(1),
     })
-   }
-
-  ngOnInit(): void {
   }
 
-  save() {
-    if (this.postForm.valid) {
+  ngOnInit(): void {
+    this.getCustomer();
+  }
+
+  update() {
+    if(this.postForm.valid) {
       this.customer = this.postForm.value;
       this.customer.image = this.image;
-      console.log(this.customer);
-      
+
+      this.customerService.update(this.id, this.customer).subscribe(data=>{
+        this.toastr.success('Cập nhật thành công!', 'Hệ thống');
+        this.editFinish.emit('done');
+      })
     } else {
-      this.toastr.error('Thêm thất bại!', 'Hệ thống');
+      this.toastr.error('Hãy kiểm tra lại dữ liệu! ', 'Hệ thống');
     }
-    this.postForm = new FormGroup({
-      'userId': new FormControl(0),
-      'email': new FormControl(null, [Validators.minLength(4), Validators.email, Validators.required]),
-      'name': new FormControl(null, [Validators.minLength(4), Validators.required]),
-      'password': new FormControl(null, [Validators.minLength(6), Validators.required]),
-      'address': new FormControl(null, [Validators.minLength(4), Validators.required]),
-      'phone': new FormControl(null, [Validators.minLength(4), Validators.required]),
-      'gender': new FormControl(true),
-      'registerDate': new FormControl(new Date()),
-      'status': new FormControl(1),
-    })
-    this.image = this.url;
     this.modalService.dismissAll();
+  }
+
+  getCustomer() {
+    this.customerService.getOne(this.id).subscribe(data => {
+      this.customer = data as Customer;
+      this.postForm = new FormGroup({
+        'userId': new FormControl(this.customer.userId),
+        'email': new FormControl(this.customer.email, [Validators.minLength(4), Validators.email, Validators.required]),
+        'name': new FormControl(this.customer.name, [Validators.minLength(4), Validators.required]),
+        'password': new FormControl(this.customer.password, [Validators.minLength(6), Validators.required]),
+        'address': new FormControl(this.customer.address, [Validators.minLength(4), Validators.required]),
+        'phone': new FormControl(this.customer.phone, [Validators.minLength(4), Validators.required]),
+        'gender': new FormControl(this.customer.gender),
+        'registerDate': new FormControl(this.customer.registerDate),
+        'status': new FormControl(1),
+      })
+      this.image = this.customer.image;
+    }, error => {
+      this.toastr.error('Lỗi truy xuất dữ liệu! ', 'Hệ thống');
+    })
   }
 
   open(content: TemplateRef<any>) {

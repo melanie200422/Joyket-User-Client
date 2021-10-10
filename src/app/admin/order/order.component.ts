@@ -14,4 +14,9 @@ export class OrderComponent implements OnInit {
     this.pageService.setPageActive('order');
   }
 
+  search(event: any) {
+    const fValue = (event.target as HTMLInputElement).value;
+    // this.listData.filter = fValue.trim().trim().toLowerCase();
+  }
+
 }

@@ -11,4 +11,5 @@ export class Product {
     'enteredDate': Date;
     'category': Category;
     'status': boolean;
+    'sold': number;
 }

@@ -31,14 +31,15 @@ export class AddProductComponent implements OnInit {
   constructor(private modalService: NgbModal, private categoryService: CategoryService, private productService: ProductService, private toastr: ToastrService, private uploadService: UploadService) {
     this.postForm = new FormGroup({
       'productId': new FormControl(0),
-      'name': new FormControl(null, [Validators.minLength(6), Validators.required]),
+      'name': new FormControl(null, [Validators.minLength(4), Validators.required]),
       'quantity': new FormControl(null, [Validators.min(1), Validators.required]),
       'price': new FormControl(null, [Validators.required, Validators.min(1000)]),
       'discount': new FormControl(null, [Validators.required, Validators.min(0), Validators.max(100)]),
       'description': new FormControl(null, Validators.required),
       'enteredDate': new FormControl(new Date()),
       'categoryId': new FormControl(1),
-      'status': new FormControl(1)
+      'status': new FormControl(1),
+      'sold': new FormControl(0),
     })
   }
 
@@ -62,14 +63,15 @@ export class AddProductComponent implements OnInit {
     }
     this.postForm = new FormGroup({
       'productId': new FormControl(0),
-      'name': new FormControl(null, [Validators.minLength(6), Validators.required]),
+      'name': new FormControl(null, [Validators.minLength(4), Validators.required]),
       'quantity': new FormControl(null, [Validators.min(1), Validators.required]),
       'price': new FormControl(null, [Validators.required, Validators.min(1000)]),
       'discount': new FormControl(null, [Validators.required, Validators.min(0), Validators.max(100)]),
       'description': new FormControl(null, Validators.required),
       'enteredDate': new FormControl(new Date()),
       'categoryId': new FormControl(1),
-      'status': new FormControl(1)
+      'status': new FormControl(1),
+      'sold': new FormControl(0),
     })
     this.image = this.url;
     this.modalService.dismissAll();

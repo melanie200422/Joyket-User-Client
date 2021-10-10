@@ -32,6 +32,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AddProductComponent } from './add-product/add-product.component';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 
 const routes: Routes = [
   {
@@ -74,7 +75,8 @@ const routes: Routes = [
     ProfileComponent,
     AddProductComponent,
     AddCustomerComponent,
-    EditProductComponent
+    EditProductComponent,
+    EditCustomerComponent,
   ],
   imports: [
     CommonModule,

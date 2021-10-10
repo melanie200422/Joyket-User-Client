@@ -31,14 +31,15 @@ export class EditProductComponent implements OnInit {
   constructor(private modalService: NgbModal, private categoryService: CategoryService, private productService: ProductService, private toastr: ToastrService, private uploadService: UploadService) {
     this.postForm = new FormGroup({
       'productId': new FormControl(0),
-      'name': new FormControl(null, [Validators.minLength(6), Validators.required]),
+      'name': new FormControl(null, [Validators.minLength(4), Validators.required]),
       'quantity': new FormControl(null, [Validators.min(1), Validators.required]),
       'price': new FormControl(null, [Validators.required, Validators.min(1000)]),
       'discount': new FormControl(null, [Validators.required, Validators.min(0), Validators.max(100)]),
       'description': new FormControl(null, Validators.required),
       'enteredDate': new FormControl(new Date()),
       'categoryId': new FormControl(1),
-      'status': new FormControl(1)
+      'status': new FormControl(1),
+      'sold': new FormControl(0),
     })
   }
 
@@ -68,14 +69,15 @@ export class EditProductComponent implements OnInit {
       this.product = data as Product;
       this.postForm = new FormGroup({
         'productId': new FormControl(this.product.productId),
-        'name': new FormControl(this.product.name, [Validators.minLength(6), Validators.required]),
+        'name': new FormControl(this.product.name, [Validators.minLength(4), Validators.required]),
         'quantity': new FormControl(this.product.quantity, [Validators.min(1), Validators.required]),
         'price': new FormControl(this.product.price, [Validators.required, Validators.min(1000)]),
         'discount': new FormControl(this.product.discount, [Validators.required, Validators.min(0), Validators.max(100)]),
         'description': new FormControl(this.product.description, Validators.required),
         'enteredDate': new FormControl(this.product.enteredDate),
         'categoryId': new FormControl(this.product.category.categoryId),
-        'status': new FormControl(1)
+        'status': new FormControl(1),
+        'sold': new FormControl(this.product.sold),
       })
       this.image = this.product.image;
     }, error => {
