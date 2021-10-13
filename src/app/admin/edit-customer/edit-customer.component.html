@@ -36,7 +36,7 @@
                 <div class="form-group col-12">
                     <label for="phone">Số điện thoại</label>
                     <div class="input-group">
-                        <input type="text" id="phone" [ngClass]="{'is-invalid':postForm.get('phone')?.touched && postForm.get('address')?.invalid}" class="form-control" formControlName="phone">
+                        <input type="text" id="phone" [ngClass]="{'is-invalid':postForm.get('phone')?.touched && postForm.get('phone')?.invalid}" class="form-control" formControlName="phone">
                         <small class="invalid-feedback">Số điện thoại không hợp lệ</small>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
             <div class="col-6">
                 <div class="col-12 text-center">
                     <h3>Ảnh đại diện</h3>
-                    <img [src]="image" width="150px" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|} mt-3 mb-3" alt="Ảnh sản phẩm">
+                    <img [src]="image" style="width: 150px; height: 150px; object-fit: cover;" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|} mt-3 mb-3" alt="Ảnh sản phẩm">
                     <div class="custom-file" style="width: 80%;">
                         <input type="file" class="custom-file-input" id="customFile" (change)="onFileSelect($event)">
                         <label class="custom-file-label" for="customFile">Chọn ảnh</label>

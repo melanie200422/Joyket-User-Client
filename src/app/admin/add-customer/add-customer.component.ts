@@ -50,9 +50,12 @@ export class AddCustomerComponent implements OnInit {
         this.modalService.dismissAll();
         this.saveFinish.emit('done');
       }, error => {
-        this.toastr.error('Thêm thất bại!', 'Hệ thống');
+        if (error.status === 404) {
+          this.toastr.error('Email này đã tồn tại! ' + error.status, 'Hệ thống');
+        } else {
+          this.toastr.error('Thêm thất bại!', 'Hệ thống');
+        }
       })
-
     } else {
       this.toastr.error('Thêm thất bại!', 'Hệ thống');
     }
