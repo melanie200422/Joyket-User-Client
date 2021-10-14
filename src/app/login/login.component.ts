@@ -48,7 +48,11 @@ export class LoginComponent implements OnInit {
       })
       this.router.navigate(['/admin']);
     }, error=>{
-      this.toastr.error('Sai thông tin đăng nhập', 'Hệ thống');
+      Swal.fire({
+        icon: 'error',
+        title: 'Đăng nhập thất bại',
+        text: 'Sai thông tin đăng nhập!'
+      })
     })
   }
 

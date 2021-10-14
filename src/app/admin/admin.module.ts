@@ -13,8 +13,6 @@ import { OrderComponent } from './order/order.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { CustomerComponent } from './customer/customer.component';
 import { InventoryComponent } from './inventory/inventory.component';
-import { StatisticalYearComponent } from './statistical-year/statistical-year.component';
-import { StatisticalMonthComponent } from './statistical-month/statistical-month.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -34,6 +32,8 @@ import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { AuthGuard } from '../guard/auth.guard';
+import { OrderModule } from 'ngx-order-pipe';
+import { StatisticalCategoryComponent } from './statistical-category/statistical-category.component';
 
 const routes: Routes = [
   {
@@ -45,11 +45,9 @@ const routes: Routes = [
       { path: 'product', component: ProductComponent, canActivate: [AuthGuard] },
       { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard] },
       { path: 'rate', component: RateComponent, canActivate: [AuthGuard] },
-      { path: 'statistical-month', component: StatisticalMonthComponent, canActivate: [AuthGuard] },
-      { path: 'statistical-year', component: StatisticalYearComponent, canActivate: [AuthGuard] },
       { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
-      { path: 'order', component: OrderComponent, canActivate: [AuthGuard] },
-      { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+      { path: 'statistical-category', component: StatisticalCategoryComponent, canActivate: [AuthGuard] },
+      { path: 'order', component: OrderComponent, canActivate: [AuthGuard] }
     ]
   }
 
@@ -69,8 +67,6 @@ const routes: Routes = [
     OrderDetailComponent,
     CustomerComponent,
     InventoryComponent,
-    StatisticalYearComponent,
-    StatisticalMonthComponent,
     AddCategoryComponent,
     EditCategoryComponent,
     ProfileComponent,
@@ -78,6 +74,7 @@ const routes: Routes = [
     AddCustomerComponent,
     EditProductComponent,
     EditCustomerComponent,
+    StatisticalCategoryComponent
   ],
   imports: [
     CommonModule,
@@ -91,6 +88,7 @@ const routes: Routes = [
     MatInputModule,
     MatPaginatorModule,
     MatSortModule,
+    OrderModule,
     ToastrModule.forRoot({
       timeOut: 2500,
       // progressBar: true,

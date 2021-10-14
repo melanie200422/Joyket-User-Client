@@ -34,4 +34,8 @@ export class CustomerService {
   update(id: number, customer: Customer) {
     return this.httpClient.put(this.url + '/' + id, customer);
   }
+
+  updateAdmin(id: number, customer: Customer) {
+    return this.httpClient.put(this.url + '/admin/' + id, customer);
+  }
 }

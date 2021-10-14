@@ -15,7 +15,7 @@ import { PageService } from 'src/app/services/page.service';
 export class OrderComponent implements OnInit {
 
   listData!: MatTableDataSource<Order>;
-  orders!:Order[];
+  orders!: Order[];
   orderLength!: number;
   columns: string[] = ['id', 'user', 'address', 'phone', 'amount', 'orderDate', 'status', 'view'];
 
@@ -30,20 +30,28 @@ export class OrderComponent implements OnInit {
   }
 
   getAllOrder() {
-    this.orderService.get().subscribe(data=>{
+    this.orderService.get().subscribe(data => {
       this.orders = data as Order[];
       this.listData = new MatTableDataSource(this.orders);
       this.orderLength = this.orders.length;
       this.listData.sort = this.sort;
       this.listData.paginator = this.paginator;
-    }, error=>{
-      this.toastr.error('Lỗi! '+error.status, 'Hệ thống');
+    }, error => {
+      this.toastr.error('Lỗi! ' + error.status, 'Hệ thống');
     })
   }
 
   search(event: any) {
     const fValue = (event.target as HTMLInputElement).value;
-    this.listData.filter = fValue.trim().trim().toLowerCase();
+    this.orderService.get().subscribe(data => {
+      this.orders = data as Order[];
+      this.orders = this.orders.filter(o => o.user.name.toLowerCase().includes(fValue.toLowerCase()) || o.ordersId===Number(fValue) || o.address.toLowerCase().includes(fValue.toLowerCase()) || o.phone.includes(fValue.toLowerCase()));
+      this.listData = new MatTableDataSource(this.orders);
+      this.orderLength = this.orders.length;
+      this.listData.sort = this.sort;
+      this.listData.paginator = this.paginator;
+    })
+    
   }
 
   finish() {
