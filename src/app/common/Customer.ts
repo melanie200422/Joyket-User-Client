@@ -9,5 +9,4 @@ export class Customer {
     'gender': boolean;
     'registerDate': Date;
     'status': boolean;
-    'role': boolean;
 }

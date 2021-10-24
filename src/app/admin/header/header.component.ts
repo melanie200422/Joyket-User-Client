@@ -24,26 +24,22 @@ export class HeaderComponent implements OnInit {
   }
 
   getUser() {
-    let email = this.sessionService.getSession();
+    let email = this.sessionService.getUser();
+    
     this.customerService.getByEmail(email).subscribe(data=>{
       this.user = data as Customer;
       this.name = this.user.name;
       this.image = this.user.image;
-      if(!this.user.role) {
-        this.toastr.error('Đã xảy ra lỗi', 'Hệ thống');
-        this.sessionService.deleteSession();
-        this.router.navigate(['/login']);        
-      }
     }, error=>{
       this.toastr.error('Đã xảy ra lỗi', 'Hệ thống');
-      this.sessionService.deleteSession();
+      this.sessionService.signOut();
       this.router.navigate(['/login']);
     })
     
   }
 
   logOut() {
-    this.sessionService.deleteSession();
+    this.sessionService.signOut();
     this.router.navigate(['/login']);
   }
 

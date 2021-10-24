@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Login } from '../common/Login';
 import { SessionService } from './session.service';
 
 @Injectable({
@@ -6,10 +9,12 @@ import { SessionService } from './session.service';
 })
 export class AuthService {
 
-  constructor(private sessionService: SessionService) { }
+  url = 'http://localhost:8989/api/auth/';
 
-  isLogin() {
-    return this.sessionService.getSession() != null;
+  constructor(private sessionService: SessionService, private http: HttpClient) { }
+
+  login(userData: Login): Observable<any> {
+    return this.http.post(this.url + 'signin',userData);
   }
 
 }

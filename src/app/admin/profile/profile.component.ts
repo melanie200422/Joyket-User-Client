@@ -51,7 +51,6 @@ export class ProfileComponent implements OnInit {
     if(this.postForm.valid) {
       this.customer = this.postForm.value;
       this.customer.image = this.image;
-      this.customer.role = true;
       this.customerService.updateAdmin(this.customer.userId, this.customer).subscribe(data=>{
         this.toastr.success('Cập nhật thành công!', 'Hệ thống');
         this.editFinish.emit('done');        
@@ -63,7 +62,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getCustomer() {
-    let email = this.sessionService.getSession();
+    let email = this.sessionService.getUser();
     this.customerService.getByEmail(email).subscribe(data => {
       this.customer = data as Customer;
       this.postForm = new FormGroup({

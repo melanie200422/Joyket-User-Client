@@ -34,6 +34,7 @@ import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { AuthGuard } from '../guard/auth.guard';
 import { OrderModule } from 'ngx-order-pipe';
 import { StatisticalCategoryComponent } from './statistical-category/statistical-category.component';
+import { SoldestComponent } from './soldest/soldest.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
       { path: 'rate', component: RateComponent, canActivate: [AuthGuard] },
       { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
       { path: 'statistical-category', component: StatisticalCategoryComponent, canActivate: [AuthGuard] },
+      { path: 'soldest', component: SoldestComponent, canActivate: [AuthGuard] },
       { path: 'order', component: OrderComponent, canActivate: [AuthGuard] }
     ]
   }
@@ -74,7 +76,8 @@ const routes: Routes = [
     AddCustomerComponent,
     EditProductComponent,
     EditCustomerComponent,
-    StatisticalCategoryComponent
+    StatisticalCategoryComponent,
+    SoldestComponent
   ],
   imports: [
     CommonModule,
