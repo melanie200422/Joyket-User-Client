@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Customer } from 'src/app/common/Customer';
 import { CustomerService } from 'src/app/services/customer.service';
 import { PageService } from 'src/app/services/page.service';
+import { SessionService } from 'src/app/services/session.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -23,17 +24,20 @@ export class CustomerComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private pageService: PageService, private customerService: CustomerService, private toastr: ToastrService) { }
+  emailAdmin!:string;
+
+  constructor(private pageService: PageService, private customerService: CustomerService, private toastr: ToastrService, private sessionService: SessionService) { }
 
   ngOnInit(): void {
+    this.emailAdmin = this.sessionService.getUser();
     this.pageService.setPageActive('customer');
     this.getAll();
-    
   }
 
   getAll() {
     this.customerService.getAll().subscribe(data => {
       this.customers = data as Customer[];
+      this.customers = this.customers.filter(c=>c.email!=this.emailAdmin);
       this.listData = new MatTableDataSource(this.customers);
       this.listData.sort = this.sort;
       this.listData.paginator = this.paginator;

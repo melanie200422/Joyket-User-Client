@@ -19,6 +19,10 @@ export class ProductService {
     return this.httpClient.get(this.url + '/' + id);
   }
 
+  getBestSeller() {
+    return this.httpClient.get(this.url + '/bestseller-admin');
+  }
+
   save(product: Product) {
     return this.httpClient.post(this.url, product);
   }
