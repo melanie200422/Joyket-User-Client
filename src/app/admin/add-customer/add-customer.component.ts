@@ -51,7 +51,7 @@ export class AddCustomerComponent implements OnInit {
         this.saveFinish.emit('done');
       }, error => {
         if (error.status === 404) {
-          this.toastr.error('Email này đã tồn tại! ' + error.status, 'Hệ thống');
+          this.toastr.error('Email này đã tồn tại! ', 'Hệ thống');
         } else {
           this.toastr.error('Thêm thất bại!', 'Hệ thống');
         }
@@ -71,7 +71,6 @@ export class AddCustomerComponent implements OnInit {
       'status': new FormControl(1),
     })
     this.image = this.url;
-    this.modalService.dismissAll();
   }
 
   open(content: TemplateRef<any>) {

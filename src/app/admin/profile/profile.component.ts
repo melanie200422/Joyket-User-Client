@@ -38,7 +38,8 @@ export class ProfileComponent implements OnInit {
       'phone': new FormControl(null, [Validators.minLength(4), Validators.required]),
       'gender': new FormControl(true),
       'registerDate': new FormControl(new Date()),
-      'status': new FormControl(1)
+      'status': new FormControl(1),
+      'token': new FormControl(null),
     })
    }
 
@@ -74,8 +75,10 @@ export class ProfileComponent implements OnInit {
         'phone': new FormControl(this.customer.phone, [Validators.minLength(4), Validators.required, Validators.pattern('(0)[0-9]{9}')]),
         'gender': new FormControl(this.customer.gender),
         'registerDate': new FormControl(this.customer.registerDate),
-        'status': new FormControl(1)
+        'status': new FormControl(1),
+        'token': new FormControl(this.customer.token),
       })
+      
       this.image = this.customer.image;
     }, error => {
       this.toastr.error('Lỗi truy xuất dữ liệu! ', 'Hệ thống');

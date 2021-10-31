@@ -24,6 +24,7 @@
     "bootstrap": "^4.6.0",
     "chart.js": "^3.5.1",
     "jquery": "^3.6.0",
+    "jwt-decode": "^3.1.2",
     "ngb-modal": "^2.0.3",
     "ngx-order-pipe": "^2.1.1",
     "ngx-toastr": "^14.1.3",

@@ -36,6 +36,7 @@ export class EditCustomerComponent implements OnInit {
       'gender': new FormControl(true),
       'registerDate': new FormControl(new Date()),
       'status': new FormControl(1),
+      'token': new FormControl(null),
     })
   }
 
@@ -71,6 +72,7 @@ export class EditCustomerComponent implements OnInit {
         'gender': new FormControl(this.customer.gender),
         'registerDate': new FormControl(this.customer.registerDate),
         'status': new FormControl(1),
+        'token': new FormControl(this.customer.token),
       })
       this.image = this.customer.image;
     }, error => {

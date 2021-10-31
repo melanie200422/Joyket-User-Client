@@ -3,10 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { Customer } from '../common/Customer';
 import { Login } from '../common/Login';
 import { AuthService } from '../services/auth.service';
+import { CustomerService } from '../services/customer.service';
 import { SessionService } from '../services/session.service';
-import { TokenStorageService } from '../services/token-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   postForm: FormGroup;
 
-  constructor(private toastr: ToastrService, private tokenStorage: TokenStorageService, private sessionService: SessionService, private router: Router, private authService: AuthService) {
+  constructor(private toastr: ToastrService, private sessionService: SessionService, private router: Router, private authService: AuthService, private userService: CustomerService) {
     this.postForm = new FormGroup({
       'email': new FormControl(null),
       'password': new FormControl(null)
@@ -49,35 +50,43 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.login).subscribe(
       data => {
 
-        this.tokenStorage.saveToken(data.token);
-        this.tokenStorage.saveUser(data);
+        this.sessionService.saveToken(data.token);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().roles;
+        let userTemp: Customer;
+        this.userService.getByEmail(String(this.sessionService.getUser())).subscribe(data => {
+          userTemp = data as Customer;
+          if (userTemp.roles[0].name == 'ROLE_USER') {
+            Swal.fire({
+              icon: 'error',
+              title: 'Đăng nhập thất bại!',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            this.toastr.error('Sai Thông Tin Đăng Nhập', 'Hệ thống');
+            this.isLoginFailed = true;
+            this.sessionService.signOut();
+            return;
+          } else {
+            Swal.fire({
+              icon: 'success',
+              title: 'Đăng nhập thành công!',
+              showConfirmButton: false,
+              timer: 1500
+            })
 
-        if (this.tokenStorage.getUser().roles == 'ROLE_USER') {
-          this.toastr.error('Đăng nhập thất bại', 'Hệ thống');
-          this.isLoginFailed = true;
-          this.tokenStorage.signOut();
-          return;
-        }
-
+            this.router.navigate(['/admin']);
+          }
+        })
+      },
+      error => {
         Swal.fire({
-          icon: 'success',
-          title: 'Đăng nhập thành công!',
+          icon: 'error',
+          title: 'Đăng nhập thất bại!',
           showConfirmButton: false,
           timer: 1500
         })
-
-        
-
-        setTimeout(() => {
-          this.router.navigate(['/home']);
-        },
-          500);
-      },
-      error => {
         this.toastr.error('Sai Thông Tin Đăng Nhập', 'Hệ thống');
         this.isLoginFailed = true;
       }

@@ -1,3 +1,5 @@
+import { Role } from "./Role";
+
 export class Customer {
     'userId': number;
     'email': string;
@@ -9,4 +11,6 @@ export class Customer {
     'gender': boolean;
     'registerDate': Date;
     'status': boolean;
+    'roles': Role[];
+    'token': string;
 }
