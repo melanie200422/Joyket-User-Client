@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ChatMessage } from 'src/app/common/ChatMessage';
 import { Order } from 'src/app/common/Order';
 import { OrderService } from 'src/app/services/order.service';
 import { PageService } from 'src/app/services/page.service';
@@ -19,14 +21,27 @@ export class OrderComponent implements OnInit {
   orderLength!: number;
   columns: string[] = ['id', 'user', 'address', 'phone', 'amount', 'orderDate', 'status', 'view'];
 
+  
+  webSocket!: WebSocket;
+  chatMessages: ChatMessage[] = [];
+
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private pageService: PageService, private toastr: ToastrService, private orderService: OrderService) { }
+  constructor(private pageService: PageService, private toastr: ToastrService, private orderService: OrderService, private route: ActivatedRoute) { 
+    route.params.subscribe(val => {
+      this.ngOnInit();
+    })
+  }
 
   ngOnInit(): void {
+    this.openWebSocket();
     this.pageService.setPageActive('order');
     this.getAllOrder();
+  }
+
+  ngOnDestroy(): void {
+    this.closeWebSocket();
   }
 
   getAllOrder() {
@@ -56,6 +71,26 @@ export class OrderComponent implements OnInit {
 
   finish() {
     this.ngOnInit();
+  }
+
+  openWebSocket() {
+    this.webSocket = new WebSocket('ws://localhost:8989/chat');
+
+    this.webSocket.onopen = (event) => {
+      // console.log('Open: ', event);
+    };
+
+    this.webSocket.onmessage = (event) => {
+      this.getAllOrder();
+    };
+
+    this.webSocket.onclose = (event) => {
+      // console.log('Close: ', event);
+    };
+  }
+
+  closeWebSocket() {
+    this.webSocket.close();
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { ToastrService } from 'ngx-toastr';
+import { ChatMessage } from 'src/app/common/ChatMessage';
 import { Customer } from 'src/app/common/Customer';
 import { Order } from 'src/app/common/Order';
 import { Statistical } from 'src/app/common/Statistical';
@@ -30,16 +31,24 @@ export class DashboardComponent implements OnInit {
 
   revenueYearNow!: number;
   revenueMonthNow!: number;
+  
+  webSocket!: WebSocket;
+  chatMessages: ChatMessage[] = [];
 
   constructor(private pageService: PageService, private toastr: ToastrService, private orderService: OrderService, private customerService: CustomerService, private statisticalService: StatisticalService) { }
 
   ngOnInit(): void {
+    this.openWebSocket();
     this.pageService.setPageActive('dashboard');
     this.getAllOrder();
     this.getAllCustomer();
     this.getStatisticalYear();
     this.getCountYear();
     Chart.register(...registerables);
+  }
+
+  ngOnDestroy(): void {
+    this.closeWebSocket();
   }
 
   getStatisticalYear() {
@@ -179,6 +188,26 @@ export class DashboardComponent implements OnInit {
         }
       }
     });
+  }
+
+  openWebSocket() {
+    this.webSocket = new WebSocket('ws://localhost:8989/chat');
+
+    this.webSocket.onopen = (event) => {
+      // console.log('Open: ', event);
+    };
+
+    this.webSocket.onmessage = (event) => {
+      this.getAllOrder();
+    };
+
+    this.webSocket.onclose = (event) => {
+      // console.log('Close: ', event);
+    };
+  }
+
+  closeWebSocket() {
+    this.webSocket.close();
   }
 
 }
