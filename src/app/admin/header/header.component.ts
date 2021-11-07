@@ -26,14 +26,14 @@ export class HeaderComponent implements OnInit {
   chatMessages: ChatMessage[] = [];
 
   constructor(private sessionService: SessionService, private router: Router, private customerService: CustomerService,
-    private toastr: ToastrService, private webSocketService: WebSocketService, private notificationService: NotificationService) { }
+    private toastr: ToastrService, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.openWebSocket();
     this.getUser();
     this.getAllNotification()
   }
-
+  
   getUser() {
     let email = this.sessionService.getUser();
     this.customerService.getByEmail(email).subscribe(data => {
@@ -69,10 +69,6 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  ngOnDestroy(): void {
-    this.closeWebSocket();
-  }
-
   logOut() {
     this.sessionService.signOut();
     this.router.navigate(['/login']);
@@ -92,7 +88,7 @@ export class HeaderComponent implements OnInit {
     this.webSocket.onmessage = (event) => {
       const chatMessageDto = JSON.parse(event.data);
       let mess: ChatMessage = chatMessageDto as ChatMessage;
-      this.toastr.info('Khách hàng '+mess.user+' đã đặt 1 đơn hàng!', 'Hệ thống');
+      this.toastr.info('Khách hàng '+mess.user+' '+mess.message, 'Hệ thống');
       this.getAllNotification();
       this.getNotificationFalse();
       this.chatMessages.push(chatMessageDto);
