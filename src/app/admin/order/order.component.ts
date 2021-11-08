@@ -74,7 +74,7 @@ export class OrderComponent implements OnInit {
   }
 
   openWebSocket() {
-    this.webSocket = new WebSocket('ws://localhost:8989/chat');
+    this.webSocket = new WebSocket('ws://localhost:8989/notification');
 
     this.webSocket.onopen = (event) => {
       // console.log('Open: ', event);
