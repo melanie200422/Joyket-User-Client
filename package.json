@@ -25,6 +25,7 @@
     "chart.js": "^3.5.1",
     "jquery": "^3.6.0",
     "jwt-decode": "^3.1.2",
+    "mat-table-exporter": "^10.2.4",
     "ngb-modal": "^2.0.3",
     "ngx-order-pipe": "^2.1.1",
     "ngx-pagination": "^5.1.1",

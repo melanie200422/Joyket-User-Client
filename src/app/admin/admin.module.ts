@@ -36,6 +36,7 @@ import { OrderModule } from 'ngx-order-pipe';
 import { StatisticalCategoryComponent } from './statistical-category/statistical-category.component';
 import { SoldestComponent } from './soldest/soldest.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 const routes: Routes = [
   {
@@ -94,6 +95,7 @@ const routes: Routes = [
     MatSortModule,
     OrderModule,
     NgxPaginationModule,
+    MatTableExporterModule,
     ToastrModule.forRoot({
       timeOut: 2500,
       // progressBar: true,

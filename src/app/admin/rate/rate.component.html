@@ -12,8 +12,10 @@
                 <mat-label>Tìm kiếm</mat-label>
                 <input matInput type="text" (keyup)="search($event)" />
             </mat-form-field>
+            
+            <button mat-raised-button color="primary" style="float: right;" (click)="exporter.exportTable('csv', {fileName:'Danh sách đánh giá'})">Xuất Exel</button>
 
-            <table mat-table [dataSource]="listData" matSort class="mat-elevation-z8">
+            <table mat-table matTableExporter #exporter="matTableExporter" [hiddenColumns]="[2,6]" [dataSource]="listData" matSort class="mat-elevation-z8">
                 <ng-container matColumnDef="index">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 6%;">STT</th>
                     <td mat-cell *matCellDef="let row, let i = index">{{i+1}}</td>
