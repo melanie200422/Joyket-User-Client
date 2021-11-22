@@ -69,6 +69,13 @@ export class HeaderComponent implements OnInit {
     })
   }
 
+  readAll() {
+    for (const i of this.notifications) {
+      this.notificationService.readed(i.id).subscribe(data=>{        
+      })
+    }
+    this.getAllNotification();
+  }
   logOut() {
     this.sessionService.signOut();
     this.router.navigate(['/login']);
