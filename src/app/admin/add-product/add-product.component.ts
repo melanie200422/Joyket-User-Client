@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 import { ToastrService } from 'ngx-toastr';
 import { Category } from 'src/app/common/Category';
 import { Product } from 'src/app/common/Product';
@@ -28,7 +27,12 @@ export class AddProductComponent implements OnInit {
   @Output()
   saveFinish: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private modalService: NgbModal, private categoryService: CategoryService, private productService: ProductService, private toastr: ToastrService, private uploadService: UploadService) {
+  constructor(
+    private modalService: NgbModal,
+    private categoryService: CategoryService,
+    private productService: ProductService,
+    private toastr: ToastrService,
+    private uploadService: UploadService) {
     this.postForm = new FormGroup({
       'productId': new FormControl(0),
       'name': new FormControl(null, [Validators.minLength(4), Validators.required]),

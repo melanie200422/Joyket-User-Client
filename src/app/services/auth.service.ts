@@ -9,7 +9,7 @@ import { SessionService } from './session.service';
 })
 export class AuthService {
 
-  url = 'http://localhost:8989/api/auth/';
+  url = 'http://localhost:8080/api/auth/';
 
   constructor(private sessionService: SessionService, private http: HttpClient) { }
 

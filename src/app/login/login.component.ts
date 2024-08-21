@@ -27,7 +27,11 @@ export class LoginComponent implements OnInit {
 
   postForm: FormGroup;
 
-  constructor(private toastr: ToastrService, private sessionService: SessionService, private router: Router, private authService: AuthService, private userService: CustomerService) {
+  constructor(private toastr: ToastrService,
+    private sessionService: SessionService,
+    private router: Router,
+    private authService: AuthService,
+    private userService: CustomerService) {
     this.postForm = new FormGroup({
       'email': new FormControl(null),
       'password': new FormControl(null)

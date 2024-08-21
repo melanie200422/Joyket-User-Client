@@ -40,7 +40,8 @@ body {
     padding: 5rem
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins&display=swap'); */
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,700&amp;amp;subset=latin-ext');
 * {
     padding: 0;
     margin: 0;
@@ -50,7 +51,7 @@ body {
 body {
     background-color: #eee;
     height: 100vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Work+Sans', sans-serif;
     background: linear-gradient(to top, #fff 10%, rgba(93, 42, 141, 0.4) 90%) no-repeat
 }
 
@@ -63,15 +64,14 @@ body {
 }
 
 .h2 {
-    font-family: 'Kaushan Script', cursive;
     font-size: 3.5rem;
     font-weight: bold;
-    color: #65a710;
+    color: #fcb800;
     font-style: italic
 }
 
 .h4 {
-    font-family: 'Poppins', sans-serif
+    font-family: 'Work+Sans', sans-serif
 }
 
 .input-field {
@@ -80,13 +80,13 @@ body {
     display: flex;
     align-items: center;
     cursor: pointer;
-    border: 1px solid #048569;
-    color: #04853e
+    border: 1px solid #fcb800;
+    color: #fcb800
 }
 
 .input-field:hover {
-    color: #4ca065;
-    border: 1px solid #4ca068
+    color: #fcb800;
+    border: 1px solid #fcb800
 }
 
 input {
@@ -95,7 +95,7 @@ input {
     box-shadow: none;
     width: 100%;
     padding: 0px 2px;
-    font-family: 'Poppins', sans-serif
+    font-family: 'Work+Sans', sans-serif
 }
 
 .fa-eye-slash.btn {
@@ -106,13 +106,13 @@ input {
 
 a {
     text-decoration: none;
-    color: #048545;
+    color: #fcb800;
     font-weight: 700
 }
 
 a:hover {
     text-decoration: none;
-    color: #4ca072
+    color: #fcb800
 }
 
 .option {
@@ -151,7 +151,7 @@ a:hover {
     width: 13px;
     height: 13px;
     display: block;
-    background: #04852b;
+    background: #fcb800;
     position: absolute;
     top: 48%;
     left: 53%;
@@ -163,7 +163,7 @@ a:hover {
 .option input[type="radio"]:checked~.checkmark {
     background: #fff;
     transition: 300ms ease-in-out 0s;
-    border: 1px solid #048549
+    border: 1px solid #fcb800
 }
 
 .option input[type="radio"]:checked~.checkmark:after {
@@ -173,12 +173,12 @@ a:hover {
 .btn.btn-block {
     height: 35px;
     border-radius: 20px;
-    background-color: #04853a;
+    background-color: #fcb800;
     color: #fff
 }
 
 .btn.btn-block:hover {
-    background-color: #268b44e0
+    background-color: #fcb800
 }
 
 @media(max-width: 575px) {

@@ -9,14 +9,14 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$veggie-shop-admin-primary: mat.define-palette(mat.$indigo-palette);
-$veggie-shop-admin-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$angular-admin-primary: mat.define-palette(mat.$indigo-palette);
+$angular-admin-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 // The warn palette is optional (defaults to red).
-$veggie-shop-admin-warn: mat.define-palette(mat.$red-palette);
+$angular-admin-warn: mat.define-palette(mat.$red-palette);
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$veggie-shop-admin-theme: mat.define-light-theme(( color: ( primary: $veggie-shop-admin-primary, accent: $veggie-shop-admin-accent, warn: $veggie-shop-admin-warn, )));
+$angular-admin-theme: mat.define-light-theme(( color: ( primary: $angular-admin-primary, accent: $angular-admin-accent, warn: $angular-admin-warn, )));
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($veggie-shop-admin-theme);
+@include mat.all-component-themes($angular-admin-theme);

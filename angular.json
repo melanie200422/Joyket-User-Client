@@ -6,7 +6,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "veggie-shop-admin": {
+        "angular-admin": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:application": {
@@ -20,7 +20,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/veggie-shop-admin",
+                        "outputPath": "dist/angular-admin",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -75,10 +75,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "veggie-shop-admin:build:production"
+                            "browserTarget": "angular-admin:build:production"
                         },
                         "development": {
-                            "browserTarget": "veggie-shop-admin:build:development"
+                            "browserTarget": "angular-admin:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -86,7 +86,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "veggie-shop-admin:build"
+                        "browserTarget": "angular-admin:build"
                     }
                 },
                 "test": {
@@ -109,5 +109,5 @@
             }
         }
     },
-    "defaultProject": "veggie-shop-admin"
+    "defaultProject": "angular-admin"
 }

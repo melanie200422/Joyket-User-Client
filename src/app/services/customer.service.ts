@@ -7,7 +7,7 @@ import { Customer } from '../common/Customer';
 })
 export class CustomerService {
 
-  url = "http://localhost:8989/api/auth";
+  url = "http://localhost:8080/api/auth";
 
   constructor(private httpClient: HttpClient) { }
 
